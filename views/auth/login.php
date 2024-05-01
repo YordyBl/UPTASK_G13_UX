@@ -1,7 +1,7 @@
-<div class="contenedor">
-    <h1>UpTask</h1>
+<div class="contenedor login">
+    <h1 class="uptask">UpTask</h1>
     <p class="tagline">Administra tus tareas y proyectos</p>
-    <p>Grupo 4</p>
+    <p class="tagline">Grupo 4</p>
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar sesión</p>
         <form class="formulario" method='POST' action="/">
