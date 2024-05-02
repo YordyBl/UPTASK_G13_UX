@@ -3,7 +3,7 @@
     <?php include_once __DIR__ .'/../templates/nombre-sitio.php';?>
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Crea tu cuenta en UpTask</p>
-        <form class="formulario" method='POST' action="/crear">
+        <form class="formulario" method='POST' action="/">
             <div class="campo">
                 <label for="nombre">Nombre</label>
                 <input type="text" 

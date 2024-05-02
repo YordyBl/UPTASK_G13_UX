@@ -21,7 +21,8 @@ class LoginController {
     }
 
     public static function crear (Router $router){
-        $usuario = new Usuario;
+
+        //$usuario = new Usuario;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $usuario->sincronizar($_POST);
