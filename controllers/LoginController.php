@@ -37,7 +37,7 @@ class LoginController {
 
         }
 
-        //Renderizado
+        //Renderizado - Muestra la vista
         $router->render('auth/olvide', ['titulo' => 'Olvide Contraseña']);
     }
 
@@ -47,16 +47,16 @@ class LoginController {
 
         }
          //Renderizado
-         $router->render('auth/reestablecer', ['titulo' => 'reestablecer Contraseña']);
-  
-    }
-    public static function mensaje(){
-
+        $router->render('auth/reestablecer', ['titulo' => 'Reestablecer Password']);
 
     }
-    public static function confirmar(){
+    public static function mensaje(Router $router){
+        $router->render('auth/mensaje', ['titulo' => 'Cuenta creada exitosamente']);
 
+    }
+    public static function confirmar(Router $router){
 
+        $router->render('auth/confirmar', ['titulo' => 'Confirma tu cuenta UpTask']);
     }
 
 }
