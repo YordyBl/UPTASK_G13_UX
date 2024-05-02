@@ -5,6 +5,7 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar sesión</p>
         <form class="formulario" method='POST' action="/">
+
             <div class="campo">
                 <label for="email">Email</label>
                 <input type="email" 
@@ -12,6 +13,7 @@
                         id="email"
                         name="email"/>
             </div>
+            
             <div class="campo">
                 <label for="password">Password</label>
                 <input type="password" 
