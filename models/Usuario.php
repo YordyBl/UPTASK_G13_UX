@@ -3,7 +3,7 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id','nombre','email','password', 'token','confirmado'];
+    protected static $columnasDB = ['id','nombre','email','password','password2', 'token','confirmado'];
 
 
     public function __construct($args = []){
@@ -11,16 +11,26 @@ class Usuario extends ActiveRecord {
         $this-> nombre = $args['nombre'] ?? '';
         $this-> email = $args['email'] ?? '';
         $this-> password = $args['password'] ?? '';
+        $this-> password2 = $args['password2'] ?? '';
         $this-> token = $args['token'] ?? '';
         $this-> confirmado = $args['confirmado'] ?? '';
     }
     //Validacion para cuentas nuevas
     public function validarNuevaCuenta(){
-        if(!this->nombre){
-            self::$alertas['arror'][]= 'El nombre del Usuario es Obligatorio';
+        if(!$this->nombre){
+            self::$alertas['error'][]= 'El nombre del Usuario es Obligatorio';
         }
-        if (!this->email){
+        if (!$this->email){
             self::$alertas['error'][]='El Email del usuario es Obligatorio';
+        }
+        if(!$this->password){
+            self::$alertas['error'][]='El campo password esta vacio';
+        }
+        if(strlen($this->password) < 6){
+            self::$alertas['error'][]='El password debe ser mayor a 6 caracteres';
+        }
+        if($this-> password !== $this->password2){
+            self::$alertas['error'][] = 'Las contraseñas no son iguales';
         }
         return self::$alertas;
     }
