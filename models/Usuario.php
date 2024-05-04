@@ -20,10 +20,6 @@ class Usuario extends ActiveRecord {
         if(!$this->nombre){
             self::$alertas['error'][]= 'El nombre del Usuario es Obligatorio';
         }
-        if (!$this->email){
-<<<<<<< HEAD
-            self::$alertas['error'][]='El Email del Usuario es Obligatorio';
-        }
         if(!$this->password){
             self::$alertas['error'][]='El campo contraseña no puede estar vacio';
         }
@@ -32,15 +28,9 @@ class Usuario extends ActiveRecord {
         }
         if($this->password!==$this->password2){
             self::$alertas['error'][]='Las contraseñas no coinciden';
-=======
-            self::$alertas['error'][]='El Email del usuario es Obligatorio';
->>>>>>> 03661e7df9dd0f38d07402c45179539b96a931c0
         }
         if(!$this->password){
             self::$alertas['error'][]='El campo password esta vacio';
-        }
-        if(strlen($this->password) < 6){
-            self::$alertas['error'][]='El password debe ser mayor a 6 caracteres';
         }
         if($this-> password !== $this->password2){
             self::$alertas['error'][] = 'Las contraseñas no son iguales';
