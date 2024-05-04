@@ -1,5 +1,5 @@
 <div class="contenedor confirmar">
-    <h1 class="uptask">UpTask</h1>
+
     <?php include_once __DIR__ .'/../templates/nombre-sitio.php';?>
     <div class="contenedor-sm">
       

@@ -1,5 +1,4 @@
 <div class="contenedor olvide">
-    <h1 class="uptask">UpTask</h1>
     <?php include_once __DIR__ .'/../templates/nombre-sitio.php';?>
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Recupera tu Acceso Uptask</p>

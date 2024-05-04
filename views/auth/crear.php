@@ -1,9 +1,12 @@
 <div class="contenedor crear">
-    <h1 class="uptask">UpTask</h1>
     <?php include_once __DIR__ .'/../templates/nombre-sitio.php';?>
 
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Crea tu cuenta en UpTask</p>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 03661e7df9dd0f38d07402c45179539b96a931c0
         <?php include_once __DIR__ .'/../templates/alertas.php';?>
         <form class="formulario" method='POST' action="/crear">
             <div class="campo">
@@ -12,8 +15,15 @@
                         placeholder="Tu nombre"    
                         id="nombre"
                         name="nombre"
+<<<<<<< HEAD
                         value="<?php echo $usuario->nombre; ?>"/>
+=======
+                        value="<?php echo $usuario->nombre; ?>"
+                        />
+>>>>>>> 03661e7df9dd0f38d07402c45179539b96a931c0
             </div>
+
+            <!-- Email -->
             <div class="campo">
                 <label for="email">Email</label>
                 <input type="email" 
@@ -22,6 +32,8 @@
                         name="email"
                         value="<?php echo $usuario->email; ?>"/>
             </div>
+
+            <!-- Contraseña -->
             <div class="campo">
                 <label for="password">Password</label>
                 <input type="password" 
@@ -29,6 +41,8 @@
                         id="password"
                         name="password"/>
             </div>
+
+            <!-- Repite Contraseña -->
             <div class="campo">
                 <label for="password2">Repetir Password</label>
                 <input type="password" 
