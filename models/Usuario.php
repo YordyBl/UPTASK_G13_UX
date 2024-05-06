@@ -18,6 +18,7 @@ class Usuario extends ActiveRecord
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? 0;
     }
+
     //Validacion para cuentas nuevas
     public function validarNuevaCuenta()
     {
@@ -39,6 +40,35 @@ class Usuario extends ActiveRecord
         if ($this->password !== $this->password2) {
             self::$alertas['error'][] = 'Las contraseñas no son iguales';
         }
+        return self::$alertas;
+    }
+    //Validar password
+    public function validarPassword(){
+
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El campo contraseña no puede estar vacio';
+        }
+
+        if (strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'Password debe ser mayor a 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
+    //Valida Email
+    public function validadEmail()
+    {
+
+        if (!$this->email) {
+
+            self::$alertas['error'][] = 'Email es obligatorio';
+        }
+
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+
+            self::$alertas['error'][] = 'Email no válido';
+        }
+
         return self::$alertas;
     }
 

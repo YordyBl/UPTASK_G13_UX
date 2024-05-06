@@ -68,26 +68,100 @@ class LoginController
     }
     public static function olvide(Router $router)
     {
-
+        $alertas = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $usuario = new Usuario($_POST);
+            $alertas = $usuario->validadEmail();
+
+            if(empty($alertas)){
+                $usuario = Usuario::where('email', $usuario->email);
+                if($usuario && $usuario->confirmado==="1"){
+
+                    //Generar nuevo token
+                    $usuario->crearToken();
+
+                    unset($usuario->password2);
+
+                    //$actualizar el usuario
+                    $usuario->guardar();
+
+                    //Enviar Correo
+
+                    $email = new Email($usuario->nombre, $suario->email, $usuario->token);
+
+                    $email ->enviarInstrucciones();
+
+                    //imprimir alerta
+
+                    Usuario::setAlerta('exito', 'Hemos enviado las instrucciones a tu email');
+
+                }else{
+                    Usuario::setAlerta('error', 'El usuario no existe o no esta confirmado');
+                    
+                }
+                $alertas = Usuario::getAlertas();
+            }
+
         }
 
+
+
         //Renderizado - Muestra la vista
-        $router->render('auth/olvide', ['titulo' => 'Olvide Contraseña']);
+        $router->render('auth/olvide', [
+            'titulo' => 'Olvide Contraseña',
+            'alertas' => $alertas
+        ]);
     }
 
     public static function reestablecer(Router $router)
     {
+        $token =s($_GET['token']);
+        $mostrar=true;
+        
+        if(!$token)header('Location: /');
+        //Identificar el usuario con este token
+        $usuario= Usuario::where('token', $token);
+        
+
+        if(empty($usuario)){
+            Usuario::setAlerta('error', 'Token No válido');
+            $mostrar=false;
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario->sincronizar($_POST);
+
+            $alertas=$usuario->validarPassword();
+
+            if(empty($alertas)){
+                //Hashear el nuevo password
+                $usuario->hashPassword();
+                //eliminar el token
+                $usuario->token=null;
+                //guardar el usuario
+                $resultado=$usuario->guardar();
+                //redireccionar
+                if($resultado){
+                    header('Location: /');
+                }
+                debuguear($usuario);
+            }
+
         }
+        $alertas=Usuario::getAlertas();
         //Renderizado
-        $router->render('auth/reestablecer', ['titulo' => 'Reestablecer Password']);
+        $router->render('auth/reestablecer', ['titulo' => 'Reestablecer Password',
+                                             'alertas' => $alertas,
+                                            'mostrar' => $mostrar ]);
     }
+
+
     public static function mensaje(Router $router)
     {
         $router->render('auth/mensaje', ['titulo' => 'Cuenta creada exitosamente']);
     }
+
     public static function confirmar(Router $router)
     {
         $token = s($_GET['token']);
@@ -95,20 +169,23 @@ class LoginController
         $usuario = Usuario::where('token', $token);
         if (empty($usuario)) {
             Usuario::setAlerta('error', 'Token No Valido');
-        }else{
+        } else {
             //confirmar cuenta
             $usuario->confirmado = 1;
-            $usuario->token=null;
+            $usuario->token = null;
             unset($usuario->password2);
             //Guardar en la BD
-            $usuario -> guardar();
+            $usuario->guardar();
             Usuario::setAlerta('exito', 'Cuenta Validad Correctamente');
-           // debuguear($usuario);
+            // debuguear($usuario);
         }
         $alertas = Usuario::getAlertas();
-        $router->render('auth/confirmar', 
-        ['titulo' => 'Confirma tu cuenta UpTask',
-         'alertas' => $alertas
-        ]);
+        $router->render(
+            'auth/confirmar',
+            [
+                'titulo' => 'Confirma tu cuenta UpTask',
+                'alertas' => $alertas
+            ]
+        );
     }
 }
