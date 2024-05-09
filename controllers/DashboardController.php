@@ -1,5 +1,7 @@
-<? php 
+<?php
 namespace Controllers;
+
+use MVC\Router;
 
 class DashboardController{
   public static function index(Router $router){
@@ -13,7 +15,11 @@ class DashboardController{
 
   public static function crear_proyecto (Router $router){
     session_start();
+    isAuth();
+
+    $alertas=[];
     $router-> render('dashboard/crear-proyecto',[
+      'alertas'=> $alertas,
       'titulo'=>'Crear proyecto'
     ]);
   }
@@ -24,4 +30,4 @@ class DashboardController{
       'titulo'=>'Perfil'
     ]);
   }
-}
+} 

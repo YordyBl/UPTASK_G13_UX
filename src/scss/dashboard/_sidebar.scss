@@ -9,17 +9,17 @@
     margin:0;
     text-align: center;
   }
-  .sider.nar{
-    margin-top: 5rem;
+  .navegacion{
+    margin-top:4rem;
     a{
       color:v.$blanco;
       display:block;
       margin-bottom: 1.5rem;
-      padding:7rem;
+      padding:.7rem;
       transition-property: background-color;
       transition-duration: 300ms;
       font-size: 1.2rem;
-      &:hover.sidebar,
+      &:hover,
       &.activo
       {
         background-color: darken(v.$indigo , 20%);

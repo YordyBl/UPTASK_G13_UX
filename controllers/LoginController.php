@@ -10,14 +10,16 @@ class LoginController
 {
     public static function login(Router $router)
     {
+
         $alertas=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario= new Usuario($_POST);
-            $alertas=$auth -> validarLogin();
+
+            $alertas=$usuario -> validarLogin();
 
             if(empty($alertas)){
                 // Verificar que el usuario exista
-                $usuario = Usuario::where('email', $auth->email);
+                $usuario = Usuario::where('email', $usuario->email);
                 if(!$usuario || !$usuario->confirmado){
                     Usuario::setAlerta('error','El usuario No existe o no esta confirmado');
                 } else{
@@ -27,7 +29,7 @@ class LoginController
                         $_SESSION['id']= $usuario->id;
                         $_SESSION['nombre']= $usuario->nombre;
                         $_SESSION['email']= $usuario->email;
-                        $_SESSION['login']= $usuario->true;
+                        $_SESSION['login']= true;
 
                         //Redireccionar
                         header('Location:/dashboard');
