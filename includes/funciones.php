@@ -1,5 +1,5 @@
 <?php
-
+//Debuguianding los problemillas
 function debuguear($variable) : string {
     echo "<pre>";
     var_dump($variable);
@@ -19,3 +19,4 @@ function isAuth() : void {
         header('Location: /');
     }
 }
+

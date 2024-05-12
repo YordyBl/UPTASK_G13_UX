@@ -1,8 +1,8 @@
 {
   "name": "uptask-php-mvc-sass",
   "version": "1.0.0",
-  "description": "UpTask - Curso Desarrollo web Completo",
-  "author": "Juan De la torre @codigoconjuan",
+  "description": "Proyecto Final - Ux",
+  "author": "Grupo 13",
   "main": "index.js",
   "type": "module",
   "scripts": {
