@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<<<<<<< HEAD
-<div class="contenedor-sm"> 
-  <?php include_once __DIR__ .'/../templates/alertas.php';?>
-  <form class="formulario">
-    <?php include_once __DIR__ .'/formulario-proyecto.php';?>
-    <input type="submit" value="Crear proyecto"> </input>
-    </form>
-
-</div>
-
-<?php include_once __DIR__ .'/fotter-dashboard.php'?>
-=======
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -114,4 +102,3 @@
 <?php include_once __DIR__ . '/fotter-dashboard.php' ?>
 
 </html>
->>>>>>> a098bac04c3f5bd54c582b462702e915dfa95f13
