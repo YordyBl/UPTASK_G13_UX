@@ -21,7 +21,7 @@
                         id="password"
                         name="password"/>
             </div>
-            <input class="boton" type="submit" value="Iniciar Sesion"/>
+            <input class="boton" type="submit" value="Iniciar Sesion" onclick="validacionlogin()"/>
         </form>
     </div> 
     <div class="acciones">
@@ -29,6 +29,5 @@
         <a href="/olvide">¿Olvidaste tu cuenta?</a>
     </div>
     <!-- Contenedor -sm -->
-
-
+<script src="./validacionlogin.js"></script>
 </div>
