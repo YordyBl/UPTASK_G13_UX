@@ -27,8 +27,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const loginForm = document.getElementById('loginForm');
+        
         const mensajeAlerta = document.getElementById('mensajeAlerta');
-
+        
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -36,20 +37,20 @@
             mensajeAlerta.textContent = '';
             mensajeAlerta.classList.remove('error');
 
-            // Validar email
             const email = document.getElementById('email').value;
+            // Validar email
             if (!email) {
                 mostrarError('El email es obligatorio');
                 return;
             }
 
             // Validar formato de email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
+            console.log(!email.includes("@"));
+            if (!email.includes("@")) {
                 mostrarError('El email no es válido');
                 return; 
             }
-
+            
             // Validar contraseña
             const password = document.getElementById('password').value;
             if (!password) {
@@ -63,7 +64,8 @@
 
         function mostrarError(mensaje) {
             mensajeAlerta.textContent = mensaje;
-            mensajeAlerta.classList.add('error');
+            mensajeAlerta.classList.add("alerta", "error");
+
         }
     });
 </script>

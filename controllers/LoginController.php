@@ -47,7 +47,7 @@ class LoginController
         //Render a la vista
         $router->render('auth/login', [
             'titulo' => 'Iniciar Sesión',
-            'alertas'=> $alertas
+            //'alertas'=> $alertas
         ]);
     }
     public static function logout()
