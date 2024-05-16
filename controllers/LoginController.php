@@ -7,12 +7,15 @@ use MVC\Router;
 use Classes\Email;
 
 class LoginController
-{
+{ 
     public static function login(Router $router)
     {
-
         $alertas=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            
+
+
             $usuario= new Usuario($_POST);
 
             $alertas=$usuario -> validarLogin();
@@ -44,7 +47,7 @@ class LoginController
         //Render a la vista
         $router->render('auth/login', [
             'titulo' => 'Iniciar Sesión',
-            'alertas'=> $alertas
+            //'alertas'=> $alertas
         ]);
     }
     public static function logout()

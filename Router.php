@@ -29,10 +29,19 @@ class Router
             $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
+    /*  if ($fn) { // Call user fn va a llamar una función cuando no sabemos cual sera
+    // Revisamos si es un array, si es así lo estamos pasando desde nuestro controlador
+    if (is_array($fn)) { 
+        $controller = new $fn[0]();
+        $method = $fn[1];
+        $controller->$method();
+    } else {
+        $fn($this); // Llamamos a la función definida en el enrutador
+    }*/
 
         if ( $fn ) {
-            // Call user fn va a llamar una función cuando no sabemos cual sera
-            call_user_func($fn, $this); // This es para pasar argumentos
+            
+            call_user_func($fn, $this); 
         } else {
             echo "Página No Encontrada o Ruta no válida";
         }
