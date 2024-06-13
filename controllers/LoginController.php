@@ -15,7 +15,7 @@ class LoginController {
             $usuario = new Usuario($_POST);
             $alertas = $usuario->validarLogin();
             if(empty($alertas)) {
-                // Verificar quel el usuario exista
+                // Verificar que el usuario exista
                 $usuario = Usuario::where('email', $usuario->email);
                 if(!$usuario || !$usuario->confirmado ) {
                     Usuario::setAlerta('error', 'El Usuario No Existe o no esta confirmado');
@@ -68,6 +68,7 @@ class LoginController {
                     Usuario::setAlerta('error', 'El Usuario ya esta registrado');
                     $alertas = Usuario::getAlertas();
                 } else {
+                    //Hashear password
                     // Hashear el password
                     $usuario->hashPassword();
 
@@ -206,10 +207,9 @@ class LoginController {
 
         // Encontrar al usuario con este token
         $usuario = Usuario::where('token', $token);
-
-        if(empty($usuario)) {
-            // No se encontró un usuario con ese token
-            Usuario::setAlerta('error', 'Token No Válido');
+        //Encontrar al usuario con este toquen
+        if (empty($usuario)) {
+            Usuario::setAlerta('error', 'Token No Valido');
         } else {
             // Confirmar la cuenta
             $usuario->confirmado = 1;
