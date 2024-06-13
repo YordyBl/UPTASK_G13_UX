@@ -2,11 +2,19 @@
 
 namespace Model;
 
-class Usuario extends ActiveRecord
-{
+class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
 
+    public $id;
+    public $nombre;
+    public $email;
+    public $password;
+    public $password2;
+    public $password_actual;
+    public $password_nuevo;
+    public $token;
+    public $confirmado;
 
     public function __construct($args = [])
     {
@@ -15,89 +23,104 @@ class Usuario extends ActiveRecord
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? '';
+        $this->password_actual = $args['password_actual'] ?? '';
+        $this->password_nuevo = $args['password_nuevo'] ?? '';
         $this->token = $args['token'] ?? '';
-        $this->confirmado = $args['confirmado'] ?? ;
+        $this->confirmado = $args['confirmado'] ?? 0;
     }
-    //Validar el Login de Usuarios
-    public function validarLogin(){
-        if(!$this-> email){
-            self::$alertas['error'][]= 'EL Email del Usuario es Obligatorio';
-        }
-        if (!$this->password) {
-            self::$alertas['error'][] = 'El campo contraseña no puede estar vacio';
-        }
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
 
+    // Validar el Login de Usuarios
+    public function validarLogin() {
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
+        }
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             self::$alertas['error'][] = 'Email no válido';
         }
-
-        return self::$alertas;
-    }
-
-
-    //Validacion para cuentas nuevas
-    public function validarNuevaCuenta()
-    {
-        if (!$this->nombre) {
-            self::$alertas['error'][] = 'El nombre del Usuario es Obligatorio';
-        }
-        if(!$this-> email){
-            self::$alertas['error'][]= 'EL Email del Usuario es Obligatorio';
-        }
-        if (!$this->password) {
-            self::$alertas['error'][] = 'El campo contraseña no puede estar vacio';
-        }
-        if (strlen($this->password) < 6) {
-            self::$alertas['error'][] = 'Password debe ser mayor a 6 caracteres';
-        }
-        if ($this->password !== $this->password2) {
-            self::$alertas['error'][] = 'Las contraseñas no coinciden';
-        }
-        if (!$this->password) {
-            self::$alertas['error'][] = 'El campo password esta vacio';
-        }
-        if ($this->password !== $this->password2) {
-            self::$alertas['error'][] = 'Las contraseñas no son iguales';
+        if(!$this->password) {
+            self::$alertas['error'][] = 'El Password no puede ir vacio';
         }
         return self::$alertas;
+
     }
-    //Validar password
-    public function validarPassword(){
 
-        if (!$this->password) {
-            self::$alertas['error'][] = 'El campo contraseña no puede estar vacio';
+    // Validación para cuentas nuevas
+    public function validarNuevaCuenta() {
+        if(!$this->nombre) {
+            self::$alertas['error'][] = 'El Nombre del Usuario es Obligatorio';
         }
-
-        if (strlen($this->password) < 6) {
-            self::$alertas['error'][] = 'Password debe ser mayor a 6 caracteres';
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
+        }
+        if(!$this->password) {
+            self::$alertas['error'][] = 'El Password no puede ir vacio';
+        }
+        if(strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El password debe contener al menos 6 caracteres';
+        }
+        if($this->password !== $this->password2) {
+            self::$alertas['error'][] = 'Los password son diferentes';
         }
         return self::$alertas;
     }
 
-    //Valida Email
-    public function validadEmail()
-    {
-
-        if (!$this->email) {
-
-            self::$alertas['error'][] = 'Email es obligatorio';
+    // Valida un email
+    public function validarEmail() {
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
         }
-
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             self::$alertas['error'][] = 'Email no válido';
         }
-
         return self::$alertas;
     }
 
-    public function hashPassword()
-    {
+    // Valida el Password 
+    public function validarPassword() {
+        if(!$this->password) {
+            self::$alertas['error'][] = 'El Password no puede ir vacio';
+        }
+        if(strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El password debe contener al menos 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
+    public function validar_perfil() {
+        if(!$this->nombre) {
+            self::$alertas['error'][] = 'El Nombre es Obligatorio';
+        }
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        }
+        return self::$alertas;
+    }
+
+    public function nuevo_password() : array {
+        if(!$this->password_actual) {
+            self::$alertas['error'][] = 'El Password Actual no puede ir vacio';
+        }
+        if(!$this->password_nuevo) {
+            self::$alertas['error'][] = 'El Password Nuevo no puede ir vacio';
+        }
+        if(strlen($this->password_nuevo) < 6) {
+            self::$alertas['error'][] = 'El Password debe contener al menos 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
+    // Comprobar el password
+    public function comprobar_password() : bool {
+        return password_verify($this->password_actual, $this->password );
+    }
+
+    // Hashea el password
+    public function hashPassword() : void {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function crearToken()
-    {
+    // Generar un Token
+    public function crearToken() : void {
         $this->token = uniqid();
     }
 }

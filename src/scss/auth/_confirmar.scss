@@ -3,16 +3,13 @@
 
 .confirmar {
     margin-top: 5rem;
-
-    .uptask{
-        @include m.textoDegradado(v.$indigo)
+    .uptask {
+        @include m.textoDegradado(v.$indigo);
     }
-    .acciones{
+    .acciones {
         justify-content: center;
-        a{
-            
-            color:v.$indigo;
-            
+        a {
+            color: v.$indigo;
         }
     }
 }

@@ -1,56 +1,59 @@
 <div class="contenedor crear">
-    <?php include_once __DIR__ .'/../templates/nombre-sitio.php';?>
-
-
+    <?php include_once __DIR__ .'/../templates/nombre-sitio.php'; ?>
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Crea tu cuenta en UpTask</p>
-        <?php include_once __DIR__ .'/../templates/alertas.php';?>
-        <form class="formulario" method='POST' action="/crear">
+
+        <?php include_once __DIR__ .'/../templates/alertas.php'; ?>
+
+        <form class="formulario" method="POST" action="/crear">
             <div class="campo">
                 <label for="nombre">Nombre</label>
-                <input type="text" 
-                        placeholder="Tu nombre"    
-                        id="nombre"
-                        name="nombre"
-                        value="<?php echo $usuario->nombre; ?>"/>
+                <input 
+                    type="text"
+                    id="nombre"
+                    placeholder="Tu Nombre"
+                    name="nombre"
+                    value="<?php echo $usuario->nombre; ?>"
+                />
             </div>
 
-            <!-- Email -->
             <div class="campo">
                 <label for="email">Email</label>
-                <input type="email" 
-                        placeholder="Tu @Email"    
-                        id="email"
-                        name="email"
-                        value="<?php echo $usuario->email; ?>"/>
+                <input 
+                    type="email"
+                    id="email"
+                    placeholder="Tu Email"
+                    name="email"
+                    value="<?php echo $usuario->email; ?>"
+                />
             </div>
 
-            <!-- Contraseña -->
             <div class="campo">
                 <label for="password">Password</label>
-                <input type="password" 
-                        placeholder="Contraseña"    
-                        id="password"
-                        name="password"/>
+                <input 
+                    type="password"
+                    id="password"
+                    placeholder="Tu Password"
+                    name="password"
+                />
             </div>
 
-            <!-- Repite Contraseña -->
             <div class="campo">
                 <label for="password2">Repetir Password</label>
-                <input type="password" 
-                        placeholder="Repite tu password"    
-                        id="password2"
-                        name="password2"/>
-                        
+                <input 
+                    type="password"
+                    id="password2"
+                    placeholder="Repite tu Password"
+                    name="password2"
+                />
             </div>
-            <input class="boton" type="submit" value="Crear cuenta"/>
+
+            <input type="submit" class="boton" value="Crear Cuenta">
         </form>
-    </div> 
-    <div class="acciones">
-        <a href="/">¿Ya tienes cuenta? Iniciar sesión</a>
-        <a href="/olvide">¿Olvidaste tu cuenta?</a>
-    </div>
-    <!-- Contenedor -sm -->
 
-
+        <div class="acciones">
+            <a href="/">¿Ya tienes cuenta? Iniciar Sesión</a>
+            <a href="/olvide">¿Olvidaste tu Password?</a>
+        </div>
+    </div> <!--.contenedor-sm -->
 </div>

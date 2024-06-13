@@ -3,8 +3,7 @@
 
 .mensaje {
     margin-top: 5rem;
-
-    .uptask{
-        @include m.textoDegradado(v.$naranja)
+    .uptask {
+        @include m.textoDegradado(v.$naranja);
     }
 }
