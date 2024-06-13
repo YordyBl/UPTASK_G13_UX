@@ -73,7 +73,7 @@ class LoginController
                     Usuario::setAlerta('error', 'El usuario ya esta registrado');
                     $alertas = Usuario::getAlertas();
                 } else {
-
+                    //Hashear password
                     $usuario->hashPassword();
 
                     unset($usuario->password2); //Quita del set a passwrod 2
@@ -203,6 +203,7 @@ class LoginController
         $token = s($_GET['token']);
         if (!$token) header('Location: /');
         $usuario = Usuario::where('token', $token);
+        //Encontrar al usuario con este toquen
         if (empty($usuario)) {
             Usuario::setAlerta('error', 'Token No Valido');
         } else {

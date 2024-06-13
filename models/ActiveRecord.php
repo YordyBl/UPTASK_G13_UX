@@ -90,6 +90,10 @@ class ActiveRecord {
         // Resultado de la consulta
         $resultado = self::$db->query($query);
 
+        if(!$resultado) {
+            throw new \Exception("Error en la consulta: " . self::$db->error);
+        }
+    
         return [
            'resultado' =>  $resultado,
            'id' => self::$db->insert_id
@@ -177,7 +181,7 @@ class ActiveRecord {
     public function sincronizar($args=[]) { 
         foreach($args as $key => $value) {
           if(property_exists($this, $key) && !is_null($value)) {
-            $this->$key = $value;
+            $this->$key = is_numeric($value) ? (int)$value : $value;
           }
         }
     }
