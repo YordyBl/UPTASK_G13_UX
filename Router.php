@@ -37,6 +37,8 @@ class Router
         }
     }
 
+    #Renderizado
+
     public function render($view, $datos = [])
     {
 
