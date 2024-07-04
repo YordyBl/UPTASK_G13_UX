@@ -225,7 +225,7 @@
         datos.append('proyectoId', obtenerProyecto());
 
         try {
-            const url = 'http://localhost:3000/api/tarea';
+            const url = 'https://quqwede.sao.dom.my.id/api/tarea';
             const respuesta = await fetch(url, {
                 method: 'POST',
                 body: datos
@@ -279,7 +279,7 @@
         datos.append('proyectoId', obtenerProyecto());
 
         try {
-            const url = 'http://localhost:3000/api/tarea/actualizar';
+            const url = 'https://quqwede.sao.dom.my.id/api/tarea/actualizar';
 
             const respuesta = await fetch(url, {
                 method: 'POST',
@@ -343,7 +343,7 @@
         datos.append('proyectoId', obtenerProyecto());
 
         try {
-            const url = 'http://localhost:3000/api/tarea/eliminar';
+            const url = 'https://quqwede.sao.dom.my.id/api/tarea/eliminar';
             const respuesta = await fetch(url, {
                 method: 'POST',
                 body: datos
