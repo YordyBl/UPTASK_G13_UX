@@ -21,7 +21,7 @@ class Email
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = $_ENV['EMAIL_PORT'];;
+        $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PORT'];
         $mail->setFrom('cuentas@Uxgrupo13.com');
@@ -52,7 +52,7 @@ class Email
         $mail->CharSet = 'UTF-8';
         $contenido = '<html>';
         $contenido .= "<p><strong> Hola " . $this->nombre . "</strong> Para recuperar tu contraseña dale click al siguiente enlace: </p>";
-        $contenido .= "<p>Presiona aquí: <a href='" . $_ENV['APP_URL'] . "/reestablecer?token=" . $this->token . "' > Reestablecer contraseña </a></p>";
+        $contenido .= "<p>Presiona aquí: <a href='" .$_ENV['APP_URL'] . "/reestablecer?token=" . $this->token . "' > Reestablecer contraseña </a></p>";
         $contenido .= "<p>Si tu no hiciste la solicitud puedes ignorar el mensaje</p>";
         $contenido .= '</html>';
         $mail->Body = $contenido;
